@@ -79,15 +79,15 @@ class CustomPing(commands.Cog):
         message = await ctx.send("Pinging...")
         end = time.monotonic()
         totalPing = round((end - start) * 1000, 2)
-        e = discord.Embed(title="Pinging..", description=f"Overall Latency: {totalPing}ms")
+        e = discord.Embed(title="Pinging..", description=f"overall: {totalPing}ms")
         await asyncio.sleep(0.25)
         try:
-            await message.edit(content=None, embed=e)
+            await message.edit(content=f"**ping:** `{totalPing}ms`")
         except discord.NotFound:
             return
 
         botPing = round(self.bot.latency * 1000, 2)
-        e.description = e.description + f"\nDiscord WebSocket Latency: {botPing}ms"
+        e.description = e.description + f"\nwebsocket: {botPing}ms"
         await asyncio.sleep(0.25)
 
         averagePing = (botPing + totalPing) / 2
@@ -123,7 +123,7 @@ class CustomPing(commands.Cog):
             host_latency = round(result["ping"], 2)
 
         e.title = "Pong!"
-        e.description = e.description + f"\nHost Latency: {host_latency}ms"
+        e.description = e.description + f"\nhost: {host_latency}ms"
         await asyncio.sleep(0.25)
         try:
             await message.edit(embed=e)
