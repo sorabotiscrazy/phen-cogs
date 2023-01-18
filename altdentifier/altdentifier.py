@@ -254,7 +254,6 @@ class AltDentifier(commands.Cog):
         color = self.pick_color(trust[0])
         e = discord.Embed(
             color=color,
-            title="AltDentifier Check",
             description=f"{member.mention} is {trust[1]}\nTrust Factor: {trust[0]}",
             timestamp=member.created_at,
         )
