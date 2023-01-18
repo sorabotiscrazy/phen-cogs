@@ -258,8 +258,6 @@ class AltDentifier(commands.Cog):
         )
         if actions:
             e.add_field(name="actions taken", value=actions, inline=False)
-        e.set_footer(text="Account created at")
-        e.set_thumbnail(url=member.avatar_url)
         return e
 
     def fail_embed(self, member: discord.Member) -> discord.Embed:
