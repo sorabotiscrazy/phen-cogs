@@ -37,10 +37,10 @@ from .converters import ActionConverter, LevelConverter, StrictRole
 log = logging.getLogger("red.phenom4n4n.altdentifier")
 
 formatted_trust_factors = {
-    0: "Very Distrusted",
-    1: "Distrusted",
-    2: "Trusted",
-    3: "Very Trusted",
+    0: "very distrusted",
+    1: "distrusted",
+    2: "trusted",
+    3: "very trusted",
 }
 
 
@@ -254,11 +254,10 @@ class AltDentifier(commands.Cog):
         color = self.pick_color(trust[0])
         e = discord.Embed(
             color=color,
-            description=f"{member.mention} is {trust[1]}\nTrust Factor: {trust[0]}",
-            timestamp=member.created_at,
+            description=f"{member.mention}: {trust[1]} **({trust[0]})**",
         )
         if actions:
-            e.add_field(name="Actions Taken", value=actions, inline=False)
+            e.add_field(name="actions taken", value=actions, inline=False)
         e.set_footer(text="Account created at")
         e.set_thumbnail(url=member.avatar_url)
         return e
@@ -268,7 +267,6 @@ class AltDentifier(commands.Cog):
             color=discord.Color.orange(),
             title="AltDentifier Check Fail",
             description=f"The API encountered an error. Check back later.",
-            timestamp=member.created_at,
         )
         e.set_footer(text="Account created at")
         e.set_thumbnail(url=member.avatar_url)
