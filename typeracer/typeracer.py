@@ -139,8 +139,6 @@ class TypeRacer(commands.Cog):
         img = await self.render_typerace(quote, color)
         embed = discord.Embed(color=color)
         embed.set_image(url="attachment://typerace.png")
-        if author:
-            embed.set_footer(text=f"~ {author}")
 
         msg = await ctx.send(file=discord.File(img, "typerace.png"), embed=embed)
         acc: Optional[float] = None
@@ -163,7 +161,7 @@ class TypeRacer(commands.Cog):
         except asyncio.TimeoutError:
             embed = discord.Embed(
                 color=discord.Color.blurple(),
-                description=f"No one typed the [sentence]({msg.jump_url}) in time.",
+                description=f"nobody typed [sentence]({msg.jump_url}) in time!",
             )
             return await ctx.send(embed=embed, reference=ref)
 
@@ -171,7 +169,7 @@ class TypeRacer(commands.Cog):
         winner_ref = winner.to_reference(fail_if_not_exists=False)
         wpm = (len(quote) / 5) / (seconds / 60) * (acc / 100)
         description = (
-            f"{winner.author.mention} typed the [sentence]({msg.jump_url}) in `{seconds:.2f}s` "
+            f":tada: {winner.author.mention} typed the [sentence]({msg.jump_url}) in `{seconds:.2f}s` "
             f"with **{acc:.2f}%** accuracy. (**{wpm:.1f} WPM**)"
         )
         embed = discord.Embed(color=winner.author.color, description=description)
